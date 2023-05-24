@@ -7,6 +7,10 @@ edition = "2021"
 name = "should_panic"
 harness = false
 
+[[test]]
+name = "stack_overflow"
+harness = false
+
 [package.metadata.bootimage]
 test-args = [
     "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04",
@@ -14,7 +18,7 @@ test-args = [
     "-display", "none"
 ]
 test-success-exit-code = 33
-test-timeout = 1          # (in seconds)
+test-timeout = 5          # (in seconds)
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -24,6 +28,8 @@ volatile = "0.2.6"
 spin = "0.5.2"
 x86_64 = "0.14.2"
 uart_16550 = "0.2.0"
+pic8259 = "0.10.1"
+pc-keyboard = "0.5.0"
 
 [dependencies.lazy_static]
 version = "1.0"

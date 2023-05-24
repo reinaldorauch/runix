@@ -13,15 +13,12 @@ pub extern "C" fn _start() -> ! {
 
     runix::init(); // new
 
-    // invoke a breakpoint exception
-    x86_64::instructions::interrupts::int3(); // new
-
     #[cfg(test)]
     test_main();
 
     println!("It did not crash!");
 
-    loop {}
+    runix::hlt_loop();
 }
 
 // our existing panic handler
@@ -29,7 +26,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    runix::hlt_loop();
 }
 
 // our panic handler in test mode
